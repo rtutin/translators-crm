@@ -60,7 +60,6 @@ class Translator extends ActiveRecord
         return static::find()
             ->where(['in', 'work_schedule', [self::SCHEDULE_WEEKDAY, self::SCHEDULE_BOTH]])
             ->andWhere(['is_available' => 1])
-            ->orderBy(['full_name' => SORT_ASC])
             ->all();
     }
 
@@ -69,7 +68,6 @@ class Translator extends ActiveRecord
         return static::find()
             ->where(['in', 'work_schedule', [self::SCHEDULE_WEEKEND, self::SCHEDULE_BOTH]])
             ->andWhere(['is_available' => 1])
-            ->orderBy(['full_name' => SORT_ASC])
             ->all();
     }
 
@@ -77,7 +75,6 @@ class Translator extends ActiveRecord
     {
         return static::find()
             ->where(['is_available' => 1])
-            ->orderBy(['work_schedule' => SORT_ASC, 'full_name' => SORT_ASC])
             ->all();
     }
 
