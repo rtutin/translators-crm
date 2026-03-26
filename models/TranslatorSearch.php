@@ -33,7 +33,6 @@ class TranslatorSearch extends Translator
             'query'      => $query,
             'pagination' => ['pageSize' => 20],
             'sort'       => [
-                'defaultOrder' => ['full_name' => SORT_ASC],
                 'attributes'   => [
                     'id',
                     'full_name',

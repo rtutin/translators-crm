@@ -18,7 +18,7 @@ composer install
 Или через Docker-контейнер (если Composer не установлен локально):
 
 ```bash
-docker-compose run --rm php composer install
+docker compose run --rm php composer install
 ```
 
 ---
@@ -28,13 +28,13 @@ docker-compose run --rm php composer install
 Запустить контейнеры (PHP + MySQL):
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 Применить миграции (создание таблиц):
 
 ```bash
-docker-compose exec php php yii migrate --interactive=0
+docker compose exec php php yii migrate --interactive=0
 ```
 
 Приложение будет доступно по адресу: [http://127.0.0.1:8000](http://127.0.0.1:8000)
@@ -46,13 +46,13 @@ docker-compose exec php php yii migrate --interactive=0
 Заполнить таблицу тестовыми переводчиками:
 
 ```bash
-docker-compose exec php php yii seed
+docker compose exec php php yii seed
 ```
 
 Можно передать количество записей (по умолчанию 10):
 
 ```bash
-docker-compose exec php php yii seed 20
+docker compose exec php php yii seed 20
 ```
 
 ---
