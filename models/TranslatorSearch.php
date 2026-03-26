@@ -7,20 +7,16 @@ use yii\data\ActiveDataProvider;
 
 class TranslatorSearch extends Translator
 {
-    /**
-     * {@inheritdoc}
-     */
+    public ?string $q = null;
+
     public function rules(): array
     {
         return [
             [['id', 'is_available'], 'integer'],
-            [['full_name', 'language_pair', 'work_schedule'], 'safe'],
+            [['work_schedule', 'q'], 'safe'],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function scenarios(): array
     {
         return Model::scenarios();
@@ -38,6 +34,13 @@ class TranslatorSearch extends Translator
             'pagination' => ['pageSize' => 20],
             'sort'       => [
                 'defaultOrder' => ['full_name' => SORT_ASC],
+                'attributes'   => [
+                    'id',
+                    'full_name',
+                    'language_pair',
+                    'work_schedule',
+                    'is_available',
+                ],
             ],
         ]);
 
@@ -49,8 +52,14 @@ class TranslatorSearch extends Translator
 
         $query->andFilterWhere(['is_available'  => $this->is_available]);
         $query->andFilterWhere(['work_schedule' => $this->work_schedule]);
-        $query->andFilterWhere(['like', 'full_name',     $this->full_name]);
-        $query->andFilterWhere(['like', 'language_pair', $this->language_pair]);
+
+        if ($this->q !== null && $this->q !== '') {
+            $query->andWhere([
+                'or',
+                ['like', 'full_name',     $this->q],
+                ['like', 'language_pair', $this->q],
+            ]);
+        }
 
         return $dataProvider;
     }
