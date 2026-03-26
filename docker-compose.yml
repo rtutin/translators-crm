@@ -1,4 +1,3 @@
-version: '2'
 services:
   php:
     image: yiisoftware/yii2-php:7.4-apache
@@ -7,3 +6,18 @@ services:
       - ./:/app:delegated
     ports:
       - '8000:80'
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: yii
+      MYSQL_USER: yii
+      MYSQL_PASSWORD: yii
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
